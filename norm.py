@@ -2,7 +2,7 @@
 import quthon
 import matplotlib.pyplot as plt
 def norm():
-    qsta = quthon.QState(26)
+    qsta = quthon.Qubits(26)
     for i in range(0, 22, 11):
         for j in range(0, 8, 4):
             for k in range(0, 2, 1):

@@ -1,6 +1,6 @@
 import numpy as np
 import scipy as sp
-class QState:
+class Qubits:
     def __init__(self, q_num):
         self.q_num = q_num
         self.state = np.zeros(2 ** q_num, dtype = np.complex128)
@@ -45,29 +45,33 @@ class QState:
             [+1+0j, +0+0j],
             [+0+0j, -1+0j],
         ])
-        PS_matrix = sp.linalg.fractional_matrix_power(PS_matrix, theta / np.pi)
-        return self.op(PS_matrix, q_idx)
+        return self.op(sp.linalg.fractional_matrix_power(PS_matrix, theta / np.pi), q_idx)
     def RX(self, theta, q_idx): # Rotation X
         RX_matrix = np.array([
             [+1+0j, +0-1j],
             [+0-1j, +1+0j],
         ]) / np.sqrt(2)
-        RX_matrix = sp.linalg.fractional_matrix_power(RX_matrix, theta / np.pi)
-        return self.op(RX_matrix, q_idx)
+        return self.op(sp.linalg.fractional_matrix_power(RX_matrix, theta / np.pi), q_idx)
     def RY(self, theta, q_idx): # Rotation Y
         RY_matrix = np.array([
             [+1+0j, -1+0j],
             [+1+0j, +1+0j],
         ]) / np.sqrt(2)
-        RY_matrix = sp.linalg.fractional_matrix_power(RY_matrix, theta / np.pi)
-        return self.op(RY_matrix, q_idx)
+        return self.op(sp.linalg.fractional_matrix_power(RY_matrix, theta / np.pi), q_idx)
     def RZ(self, theta, q_idx): # Rotation Z
         RZ_matrix = np.array([
             [+0+1j, +0+0j],
             [+0+0j, +0-1j],
         ])
-        RZ_matrix = sp.linalg.fractional_matrix_power(RZ_matrix, theta / np.pi)
-        return self.op(RZ_matrix, q_idx)
+        return self.op(sp.linalg.fractional_matrix_power(RZ_matrix, theta / np.pi), q_idx)
+    def U(self, theta, phi, lam, q_idx): # Arbitrary Unitary
+        U_variable = np.array([
+            +np.cos(theta / 2) * np.exp(1j * (0.0 + 0.0)),
+            -np.sin(theta / 2) * np.exp(1j * (0.0 + lam)),
+            +np.sin(theta / 2) * np.exp(1j * (phi + 0.0)),
+            +np.cos(theta / 2) * np.exp(1j * (phi + lam)),
+        ]).reshape((2, 2))
+        return self.op(U_variable, q_idx)
     def SWAP(self, q1idx, q2idx): # Swap
         SWAP_matrix = np.array([
             [1, 0, 0, 0],
