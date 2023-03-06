@@ -28,7 +28,7 @@ qbts.H(0).H(1).TOFF(0, 1, 2)
 ### Measure the Qubits
 
 ```py
-prob = qbts.MEASURE(2, 1, 0) # Obtain the probability distribution table for the states of these three qubits
+prob = qbts.measure(2, 1, 0) # Obtain the probability distribution table for the states of these three qubits
 print(prob[0, 0, 1])         # Print out the probability of {q2, q1, q0} = |100>, it's supposed to be 0.25
 ```
 
