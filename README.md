@@ -59,4 +59,4 @@ plt.show()
 
 Screenshot of the running result:
 
-![image](https://user-images.githubusercontent.com/83796250/223068427-688d998f-6e1d-4877-b7fa-4f591a90bd2d.png)
+![image](https://user-images.githubusercontent.com/83796250/223098305-1472e264-7c51-42c5-9337-cc8af2123c7d.png)
